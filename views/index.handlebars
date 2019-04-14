@@ -1,0 +1,29 @@
+
+<header>
+<h1>Welcome to Newspoll</h1>
+<button id="getnews" type="submit">Get Latest News</button>
+</header>  
+
+<section>
+  <h2>View news and write note</h2>
+  <section>
+    <hr>
+    {{#each articles}}
+      <div>
+        <p id="hidenid" hidden>{{this._id}}</p>
+        Article: <a href="https://www.nytimes.com{{this.link}}">{{this.title}}</a>
+        <br>
+        Summary: {{this.summary}}
+        <br>
+        Note Title: <input id="titleinput" type="text" size="25"> 
+        Note Body: <input id="bodyinput" type="text" size="75">
+        <button id="savenote" type="submit">Update Note</button>
+        <button id="deletenote" type="submit">Delete Note</button>
+        <hr>
+      </div>
+    {{/each}}
+  </section>
+
+<footer>
+  @Rutgers Coding Bootcamp Himanshu Pandit
+</footer>
