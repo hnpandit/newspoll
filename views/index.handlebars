@@ -10,15 +10,14 @@
     <hr>
     {{#each articles}}
       <div>
-        <p id="hidenid" hidden>{{this._id}}</p>
         Article: <a href="https://www.nytimes.com{{this.link}}">{{this.title}}</a>
         <br>
         Summary: {{this.summary}}
         <br>
-        Note Title: <input id="titleinput" type="text" size="25"> 
-        Note Body: <input id="bodyinput" type="text" size="75">
-        <button id="savenote" type="submit">Update Note</button>
-        <button id="deletenote" type="submit">Delete Note</button>
+        Note Title: <input id="titleinput{{this._id}}" type="text" size="25" value={{this.note.title}}> 
+        Note Body: <input id="bodyinput{{this._id}}" type="text" size="75" value={{this.note.body}}>
+        <button id="savenote" type="submit" data-article-id={{this._id}}>Update Note</button>
+        <button id="deletenote" type="submit" data-article-id={{this._id}} data-note-id={{this.note._id}}>Delete Note</button>
         <hr>
       </div>
     {{/each}}

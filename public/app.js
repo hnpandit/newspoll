@@ -44,7 +44,8 @@ $(document).on("click", "p", function() {
 // When you click the savenote button
 $(document).on("click", "#savenote", function() {
   // Grab the id associated with the article from the submit button
-  var thisId = $("hiddenid").val;
+  //var thisId = $("hiddenid").val;
+  var thisId = $(this).attr("data-article-id");
 
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
@@ -52,13 +53,35 @@ $(document).on("click", "#savenote", function() {
     url: "/articles/" + thisId,
     data: {
       // Value taken from title input
-      title: $("#titleinput").val(),
+      title: $("#titleinput"+thisId).val(),
       // Value taken from note textarea
-      body: $("#bodyinput").val()
+      body: $("#bodyinput"+thisId).val()
     }
   })
     // With that done
     .then(function(data) {
+      // Log the response
+      console.log(data);
+      // Empty the notes section
+      $("#notes").empty();
+    });
+});
+
+// When you click the savenote button
+$(document).on("click", "#deletenote", function() {
+  // Grab the id associated with the article from the submit button
+  //var thisId = $("hiddenid").val;
+  var thisId = $(this).attr("data-article-id");
+  var noteId = $(this).attr("data-note-id");
+
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "DELETE",
+    url: "/articles/" + thisId + "/" + noteId
+  })
+    // With that done
+    .then(function(data) {
+      window.location.reload();
       // Log the response
       console.log(data);
       // Empty the notes section
